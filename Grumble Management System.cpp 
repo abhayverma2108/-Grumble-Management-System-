@@ -1,0 +1,964 @@
+//------------------------------------------------------- 
+
+//Project -- Grumble Management System 
+
+//------------------------------------------------------- 
+
+ 
+
+//------------------------------------------------------- 
+
+// Developer: Sachin Raosaheb Dalvi 
+
+//------------------------------------------------------- 
+
+// Administrator Password to Login 
+
+//------------------------------------------------------- 
+
+/* 
+
+username == user 
+
+password == pass 
+
+*/ 
+
+ 
+ 
+
+//Standard Library 
+
+ 
+ 
+
+#include <iostream> 
+
+#include <stdlib.h> 
+
+#include <string> 
+
+#include <cctype> 
+
+#include <fstream> 
+
+ 
+
+using namespace std; 
+
+class grumble //base class 
+
+{ 
+
+public: 
+
+void customer_StoreGrumble(); 
+
+void admin_menu(); 
+
+    void create_grumble(); 
+
+    void cancel_grumble(); 
+
+    void update_grumble (); 
+
+void print_grumble(); 
+
+void view_grumble(); 
+
+void exit(); 
+
+grumble();//constuctor 
+
+}; 
+
+ grumble::grumble () 
+
+{ 
+
+} //constructor for class CarType 
+
+struct node //construct node 
+
+{ 
+
+int grumble_number; 
+
+string customerName; 
+
+string date; 
+
+string x; 
+
+node *prev; 
+
+node *next; 
+
+node *link; 
+
+} 
+
+*q, *temp; //pointer declaration 
+
+node *start_ptr = NULL; 
+
+node *head = NULL; 
+
+node *last = NULL; 
+
+int main() // Main function 
+
+{ 
+
+grumble admin; 
+
+system("COLOR 79"); //Color to change background 
+
+int option; 
+
+do 
+
+{ 
+
+cout<<"\n"; 
+
+    cout<<"\t\t ================================================\n"; 
+
+cout<<"\t\t|               Grumble Management System  |\n"; 
+
+cout<<"\t\t ================================================\n\n\n"; 
+
+ 
+ 
+
+cout<<"\t\t-------------------------------------------------\n"; 
+
+cout<<"\t\t|\t1. Customer \t\t\t\t|\n"; 
+
+cout<<"\t\t-------------------------------------------------\n"; 
+
+cout<<"\t\t-------------------------------------------------\n"; 
+
+cout<<"\t\t|\t2. Administrator \t\t\t|\n"; 
+
+cout<<"\t\t-------------------------------------------------\n"; 
+
+cout<<"\t\t-------------------------------------------------\n"; 
+
+cout<<"\t\t|\t3. EXIT \t\t\t\t|\n"; 
+
+cout<<"\t\t-------------------------------------------------\n\n"; 
+
+    cout<<"\t\tInput number Associated with Your User Type: "; 
+
+cin>>option; 
+
+switch(option) 
+
+{ 
+
+case 1: 
+
+admin.customer_StoreGrumble(); 
+
+break; 
+
+case 2: 
+
+admin.admin_menu(); 
+
+break; 
+
+case 3: 
+
+admin.exit(); //function exit 
+
+goto a; 
+
+break; 
+
+} 
+
+}while(option!=3);//end do 
+
+a://goto 
+
+cout<<"thank you"<<endl; 
+
+system ("PAUSE"); 
+
+}//end  main function 
+
+void grumble::customer_StoreGrumble()  
+
+{ 
+
+system("cls"); 
+
+cout<<"\n"; 
+
+    cout<<"\t\t ================================================\n"; 
+
+cout<<"\t\t|              Grumble Management System |\n"; 
+
+cout<<"\t\t ================================================\n\n\n"; 
+
+cout <<"\nAdd Your Grumble Details\n"; 
+
+cout <<"________________________________\n\n"; 
+
+node *temp; 
+
+temp = new node; 
+
+cout << "Type Grumble no: "; 
+
+    cin >> temp->grumble_number; 
+
+cout<< "Enter Your Name: "; 
+
+cin.ignore(); 
+
+getline(cin, temp->customerName); 
+
+cout<<"Enter Date : "; 
+
+cin>>temp->date; 
+
+cout << "Grumble Description:"; 
+
+cout<<"( 1000 words maximum ) \n"; 
+
+cin.ignore(); 
+
+getline(cin, temp->x); 
+
+cout<<"==========================================================================="<<endl; 
+
+    cout << "Grumble added Successfully"<<endl; 
+
+    cout<<"==========================================================================="<<endl;    
+
+system ("PAUSE"); 
+
+    temp->next=NULL; 
+
+if(start_ptr!=NULL) 
+
+{ 
+
+temp->next=start_ptr; 
+
+} 
+
+start_ptr=temp; 
+
+system("cls"); 
+
+} 
+
+void grumble::admin_menu() 
+
+{ 
+
+grumble admin; 
+
+int menu; 
+
+string userName, userPassword; 
+
+system("cls"); 
+
+cout<<"\n"; 
+
+    cout<<"\t\t ===================================================\n"; 
+
+cout<<"\t\t|              Grumble Management System    |\n"; 
+
+cout<<"\t\t ===================================================\n\n\n"; 
+
+    cout<<"\t\t----------------------------------------------------\n"; 
+
+    cout<<"\t\t\t  Administrator / Staff Login      \n"; 
+
+    cout<<"\t\t----------------------------------------------------\n\n"; 
+
+    cout << "\n\n\t\tPlease enter your user name: "; 
+
+    cin >> userName; 
+
+    cout << "\n\n\t\tPlease enter your user password: "; 
+
+    cin >> userPassword; 
+
+    if (userName == "user" && userPassword == "pass") 
+
+    { 
+
+    do 
+
+{ 
+
+        system("cls"); 
+
+        cout<<"\n"; 
+
+        cout<<"\t\t ===================================================\n"; 
+
+cout<<"\t\t|           Grumble Management System    |\n"; 
+
+cout<<"\t\t ===================================================\n\n\n"; 
+
+cout<<"\t\t--------------------------------------------------\n"; 
+
+cout<<"\t\t||\t1. Create a Grumble \t\t\t ||\n"; 
+
+cout<<"\t\t||\t2. View Grumble\t\t\t ||\n"; 
+
+cout<<"\t\t||\t3. Update Grumble Status \t\t ||\n"; 
+
+cout<<"\t\t||\t4. Print the grumble \t\t\t ||\n"; 
+
+cout<<"\t\t||\t5. Cancel a Grumble \t\t\t ||\n"; 
+
+cout<<"\t\t||\t6. Logout\t\t\t\t ||\n"; 
+
+cout<<"\t\t--------------------------------------------------\n"; 
+
+cout<<"Enter choice: "; 
+
+//---Brought To You By code-projects.org--- 
+
+cin>>menu; 
+
+switch (menu) 
+
+{ 
+
+case 1: 
+
+{ 
+
+admin.create_grumble(); 
+
+break; 
+
+} 
+
+case 2: 
+
+{ 
+
+admin.view_grumble(); 
+
+system("PAUSE"); 
+
+break; 
+
+} 
+
+case 3: 
+
+{ 
+
+admin.update_grumble(); 
+
+system("PAUSE"); 
+
+break; 
+
+} 
+
+case 4: 
+
+{ 
+
+admin.print_grumble(); 
+
+system("PAUSE"); 
+
+break; 
+
+} 
+
+case 5: 
+
+{ 
+
+admin.cancel_grumble(); 
+
+system("PAUSE"); 
+
+break; 
+
+} 
+
+case 6: 
+
+{ 
+
+cout<<"You are Logged Out...!\n\n\n\n"; 
+
+system ("PAUSE"); 
+
+admin.admin_menu(); 
+
+break; 
+
+} 
+
+}//end Switch 
+
+}while(menu!=6);//end do 
+
+cout<<"thank you"<<endl; 
+
+system ("PAUSE"); 
+
+} 
+
+else 
+
+{ 
+
+           cout << "\n\n\t\tInvalid login attempt. Please try again.\n" << '\n'; 
+
+           system("PAUSE"); 
+
+           system ("cls"); 
+
+           admin.admin_menu(); 
+
+    } 
+
+} 
+
+void grumble::create_grumble() 
+
+{ 
+
+system("cls"); 
+
+cout<<"\n"; 
+
+    cout<<"\t\t ================================================\n"; 
+
+cout<<"\t\t|             Grumble Management System |\n"; 
+
+cout<<"\t\t ================================================\n\n\n"; 
+
+cout <<"\nAdd Grumble Details of Customer\n"; 
+
+cout <<"_____________________________________ \n\n"; 
+
+node *temp; 
+
+temp = new node; 
+
+cout << "Type Grumble no: "; 
+
+    cin >> temp->grumble_number; 
+
+cout<< "Enter Customer Name: "; 
+
+cin.ignore(); 
+
+getline(cin, temp->customerName); 
+
+cout<<"Enter Date : "; 
+
+cin>>temp->date; 
+
+cout << "Grumble Description:"; 
+
+cout<<"( 1000 words maximum ) \n"; 
+
+cin.ignore(); 
+
+getline(cin, temp->x); 
+
+cout<<"==========================================================================="<<endl; 
+
+    cout << "Grumble added Successfully"<<endl; 
+
+    cout<<"==========================================================================="<<endl; 
+
+    cout << "Go to Print Grumble to print the Grumble"<<endl; 
+
+    cout<<"==========================================================================="<<endl; 
+
+system ("PAUSE"); 
+
+    temp->next=NULL; 
+
+if(start_ptr!=NULL) 
+
+{ 
+
+temp->next=start_ptr; 
+
+} 
+
+start_ptr=temp; 
+
+system("cls"); 
+
+} 
+
+void grumble::view_grumble() 
+
+{ 
+
+int num; 
+
+bool found; //variable to search 
+
+system("cls"); 
+
+node *temp; 
+
+temp=start_ptr; 
+
+found = false; 
+
+cout<<"\n"; 
+
+    cout<<"\t\t ================================================\n"; 
+
+cout<<"\t\t|           Grumble Management System |\n"; 
+
+cout<<"\t\t ================================================\n\n\n"; 
+
+cout<<" Enter the Grumble Number To Look into The Grumble Details\n"; 
+
+cin>>num; 
+
+cout<<"\n"; 
+
+cout<<"---------------------------------------------------------------------------"<<endl; 
+
+cout <<"\t\tHere is the Grumble list\n"; 
+
+cout<<"---------------------------------------------------------------------------"<<endl; 
+
+if(temp == NULL)  
+
+{ 
+
+cout << "\tThere is no Grumble to show\n\t\t\tSo The List is Empty\n\n\n"; 
+
+} 
+
+while(temp !=NULL && !found) 
+
+{ 
+
+if (temp->grumble_number==num) 
+
+{ 
+
+found = true; 
+
+} 
+
+else 
+
+{ 
+
+temp = temp -> next; 
+
+} 
+
+        if (found) 
+
+        { 
+
+cout <<"Grumble Number : "<<temp->grumble_number; 
+
+cout <<"\n"; 
+
+cout<<"Customer Name: "<<temp->customerName<<endl; 
+
+cout<<"Grumble Date : "<<temp->date<<endl; 
+
+cout<<"_____________________________________________________________________________"<<endl; 
+
+cout<<"-------------------------"<<endl; 
+
+cout<<"|Grumble description: |"<<endl; 
+
+cout<<"-------------------------"<<endl; 
+
+cout<<temp->x; 
+
+cout <<"\n"; 
+
+cout<<"_____________________________________________________________________________"<<endl; 
+
+} 
+
+} 
+
+} 
+
+void grumble::cancel_grumble() 
+
+{ 
+
+system("cls"); 
+
+int num, count; 
+
+cout<<"\n"; 
+
+    cout<<"\t\t ================================================\n"; 
+
+cout<<"\t\t|            Grumble Management System |\n"; 
+
+cout<<"\t\t ================================================\n\n\n"; 
+
+    cout<<"Enter the Grumble number you want to delete \n"; 
+
+    cin>>num; 
+
+    node *q; 
+
+node *temp; 
+
+bool found; 
+
+if(start_ptr == NULL) 
+
+cerr<<"Can not cancel from an empty list.\n"; 
+
+else 
+
+{ 
+
+if(start_ptr->grumble_number == num) 
+
+{ 
+
+q = start_ptr; 
+
+start_ptr = start_ptr->next; 
+
+count--; 
+
+if(start_ptr == NULL) 
+
+last = NULL; 
+
+delete q; 
+
+cout<<"The Grumble is Cancelled Successfully"<<endl; 
+
+} 
+
+else 
+
+{ 
+
+found = false; 
+
+temp = start_ptr; 
+
+q = start_ptr->next; 
+
+while((!found) && (q != NULL)) 
+
+{ 
+
+  if(q->grumble_number != num) 
+
+{ 
+
+temp = q; 
+
+q = q-> next; 
+
+} 
+
+else 
+
+found = true; 
+
+} 
+
+if(found) 
+
+{ 
+
+temp->next = q->next; 
+
+count--; 
+
+if(last == q) 
+
+last = temp; 
+
+delete q; 
+
+cout<<"The Grumble is Cancelled Successfully"<<endl; 
+
+} 
+
+else 
+
+cout<<"Grumble to be Cancelled is not in the list."<<endl; 
+
+} 
+
+} 
+
+} //End function 
+
+void grumble::update_grumble() 
+
+{ 
+
+ system("cls"); 
+
+ int sid; 
+
+ bool found; 
+
+ found = false; 
+
+ temp = start_ptr; 
+
+ cout<<"\n"; 
+
+ cout<<"\t\t ================================================\n"; 
+
+ cout<<"\t\t|          Grumble Management System |\n"; 
+
+ cout<<"\t\t ================================================\n\n\n"; 
+
+ cout<<"Enter Grumble Number To Update: "; 
+
+ cin>>sid; 
+
+ if (temp==NULL && sid==0) 
+
+ { 
+
+    cout<<"No Grumble To Update..!"<<endl; 
+
+ } 
+
+ else 
+
+ { 
+
+  while(temp !=NULL && !found) 
+
+{ 
+
+if (temp->grumble_number==sid) 
+
+{ 
+
+found = true; 
+
+} 
+
+else 
+
+{ 
+
+temp = temp -> next; 
+
+} 
+
+    if (found) 
+
+    { 
+
+cout << "Change  Grumble Number: "; 
+
+    cin >> temp->grumble_number; 
+
+cout<< "Change Customer Name: "; 
+
+cin.ignore(); 
+
+getline(cin, temp->customerName); 
+
+cout<<"Change Date : "; 
+
+cin>>temp->date; 
+
+cout << "Grumble Description:"<< endl; 
+
+cout<<"( 1000 words maximum ) \n"; 
+
+cout << "  " ; 
+
+cin.ignore(); 
+
+getline(cin, temp->x); 
+
+system("PAUSE"); 
+
+temp = temp->next; 
+
+} 
+
+ cout<<"GRUMBLE RECORD UPDATED....!\n\n"<<endl; 
+
+ } 
+
+  if(temp != NULL && temp->grumble_number != sid) 
+
+  { 
+
+  cout<<"Invalid Grumble Number...!\n\n"<<endl; 
+
+    } 
+
+} 
+
+} //End function 
+
+void grumble::print_grumble()  
+
+{ 
+
+int num;  
+
+bool found; //variable to search  
+
+system("cls"); 
+
+ofstream outputFile; 
+
+outputFile.open("prototype.txt"); 
+
+node *temp; 
+
+temp=start_ptr; 
+
+found = false; 
+
+  cout<<"\n"; 
+
+  cout<<"\t\t ================================================\n"; 
+
+  cout<<"\t\t|        Grumble Management System |\n"; 
+
+  cout<<"\t\t ================================================\n\n\n"; 
+
+  outputFile<<"\n"; 
+
+  outputFile<<"\t\t ================================================\n"; 
+
+  outputFile<<"\t\t|         Grumble Management System|\n"; 
+
+  outputFile<<"\t\t ================================================\n\n\n"; 
+
+cout<<" Enter the Grumble Number To Print The Grumble Details\n"; 
+
+cin>>num; 
+
+cout<<"\n"; 
+
+cout<<"---------------------------------------------------------------------------"<<endl; 
+
+cout <<"\t\tHere is the Grumble list\n";  
+
+cout<<"---------------------------------------------------------------------------"<<endl; 
+
+if(temp == NULL) 
+
+{ 
+
+cout << "\tThere is no Grumble to show\n\t\t\tSo The List is Empty\n\n\n"; 
+
+} 
+
+while(temp !=NULL && !found) 
+
+{ 
+
+if (temp->grumble_number==num) 
+
+{ 
+
+found = true; 
+
+} 
+
+else 
+
+{ 
+
+temp = temp -> next; 
+
+} 
+
+        if (found) //print the grumble 
+
+        { 
+
+cout <<"Grumble Number : "<<temp->grumble_number; 
+
+outputFile << "Grumble Number : "<<temp->grumble_number << endl; 
+
+cout <<"\n"; 
+
+cout<<"Customer Name: "<<temp->customerName<<endl; 
+
+outputFile << "Customer Name: "<<temp->customerName<<endl; 
+
+cout<<"Order Date : "<<temp->date<<endl; 
+
+outputFile << "Order Date : "<<temp->date<<endl; 
+
+cout<<"____________________________________________________________________________"<<endl; 
+
+outputFile << "____________________________________________________________________________"<<endl; 
+
+cout<<"Grumble description: "<<endl; 
+
+outputFile << "Grumble description: "<<endl; 
+
+cout<<"----------------------"<<endl; 
+
+outputFile<<"------------------------------------------------------------------------------"<<endl; 
+
+cout<< temp->x; 
+
+outputFile << temp->x<<endl;  
+
+cout <<"\n"; 
+
+cout<<"____________________________________________________________________________"<<endl; 
+
+outputFile << "____________________________________________________________________________"<<endl; 
+
+temp=temp->next; 
+
+} 
+
+outputFile.close(); 
+
+cout << "Grumble Printed Succesfully....!\n"; 
+
+} 
+
+} //End function 
+
+void grumble::exit() //Function to exit 
+
+{ 
+
+cout<<"\nYou choose to exit.\n"<<endl; 
+
+} //end function exit 
+
+ 
+
+////////////////////////////THE END OF PROGRAM////////////////////////////////////////// 
+
+ 
